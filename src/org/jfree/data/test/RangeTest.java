@@ -118,7 +118,7 @@ public class RangeTest
 	}
 	
 	@Test
-	public void testIntersectsSmallPossibleRange()
+	public void testIntersectsSmallestPossibleRange()
 	{
 		assertEquals("intersects: Did not return the expected output",
 				false,
@@ -285,21 +285,11 @@ public class RangeTest
 	@Test
 	public void testExpandToIncludeRangeIsNull()
 	{
-		try
-		{
-			Range r10 = new Range(null, null);
-			
-			assertEquals("expandToInclude: Did not return the expected output",
-					new Range(5, 5),
-					Range.expandToInclude(r10, 5));
-		}
-		catch(Exception e)
-		{
-			System.err.println(e);
-			
-			fail("An exception was thrown. Range should accept null as upper"
-					+ "and/or lower bounds");
-		}
+		Range r10 = null;
+		
+		assertEquals("expandToInclude: Did not return the expected output",
+				new Range(5, 5),
+				Range.expandToInclude(r10, 5));
 	}
 	
 	@Test
