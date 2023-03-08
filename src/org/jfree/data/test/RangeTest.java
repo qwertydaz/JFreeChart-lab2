@@ -31,4 +31,54 @@ public class RangeTest
 				rangeObjectUnderTest.getCentralValue(),
 				0.000000001d);
 	}
+	
+	@Test
+	public void testGetLengthBothPositiveAndEqual()
+	{
+		Range r1 = new Range(2, 2);
+		assertEquals("getLength: Did not return the expected output",
+				0.0,
+				r1.getLength(),
+				0.000000001d);
+	}
+	
+	@Test
+	public void testGetLengthBothPositiveAndNotEqual()
+	{
+		Range r2 = new Range(4, 9);
+		assertEquals("getLength: Did not return the expected output",
+				5.0,
+				r2.getLength(),
+				0.000000001d);
+	}
+	
+	@Test
+	public void testGetLengthBothNegativeAndEqual()
+	{
+		Range r3 = new Range(-99, -99);
+		assertEquals("getLength: Did not return the expected output",
+				0.0,
+				r3.getLength(),
+				0.000000001d);
+	}
+	
+	@Test
+	public void testGetLengthBothNegativeAndNotEqual()
+	{
+		Range r4 = new Range(-11, -4);
+		assertEquals("getLength: Did not return the expected output",
+				7.0,
+				r4.getLength(),
+				0.000000001d);
+	}
+	
+	@Test
+	public void testGetLengthOnePositiveOneNegative()
+	{
+		Range r5 = new Range(-5, 3);
+		assertEquals("getLength: Did not return the expected output",
+				8.0,
+				r5.getLength(),
+				0.000000001d);
+	}
 }
