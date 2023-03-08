@@ -3,6 +3,7 @@ package org.jfree.data.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.jfree.data.Range;
 
@@ -231,5 +232,143 @@ public class RangeTest
 	{
 		assertFalse("contains: Did not return the expected output",
 				rangeObjectUnderTest2.contains(99));
+	}
+	
+	// Method Under Test: getCentralValue
+	
+	@Test
+	public void testGetCentralValueRangeHasOneValue()
+	{
+		Range r6 = new Range(2, 2);
+		
+		assertEquals("getCentralValue: Did not return the expected output",
+				2,
+				r6.getCentralValue(),
+				0.000000001d);
+	}
+	
+	@Test
+	public void testGetCentralValueRangeHasTwoValues()
+	{
+		Range r7 = new Range(2, 3);
+		
+		assertEquals("getCentralValue: Did not return the expected output",
+				2.5,
+				r7.getCentralValue(),
+				0.000000001d);
+	}
+	
+	@Test
+	public void testGetCentralValueRangeHasThreeValues()
+	{
+		Range r8 = new Range(2, 4);
+		
+		assertEquals("getCentralValue: Did not return the expected output",
+				3,
+				r8.getCentralValue(),
+				0.000000001d);
+	}
+	
+	@Test
+	public void testGetCentralValueRangeHasFourValues()
+	{
+		Range r9 = new Range(2, 5);
+		
+		assertEquals("getCentralValue: Did not return the expected output",
+				3.5,
+				r9.getCentralValue(),
+				0.000000001d);
+	}
+	
+	// Method Under Test: expandToInclude
+	
+	@Test
+	public void testExpandToIncludeRangeIsNull()
+	{
+		try
+		{
+			Range r10 = new Range(null, null);
+			
+			assertEquals("expandToInclude: Did not return the expected output",
+					new Range(5, 5),
+					Range.expandToInclude(r10, 5));
+		}
+		catch(Exception e)
+		{
+			System.err.println(e);
+			
+			fail("An exception was thrown. Range should accept null as upper"
+					+ "and/or lower bounds");
+		}
+	}
+	
+	@Test
+	public void testExpandToIncludeRangeHasOneValue()
+	{
+		Range r11 = new Range(4, 4);
+		
+		assertEquals("expandToInclude: Did not return the expected output",
+				new Range(3, 4),
+				Range.expandToInclude(r11, 3));
+	}
+	
+	@Test
+	public void testExpandToIncludeRangeHasTwoValuesAndInputLessThanLowerBound()
+	{
+		Range r12 = new Range(4, 5);
+		
+		assertEquals("expandToInclude: Did not return the expected output",
+				new Range(3, 5),
+				Range.expandToInclude(r12, 3));
+	}
+	
+	@Test
+	public void testExpandToIncludeRangeHasTwoValuesAndInputWithinBounds()
+	{
+		Range r13 = new Range(4, 5);
+		
+		assertEquals("expandToInclude: Did not return the expected output",
+				new Range(4, 5),
+				Range.expandToInclude(r13, 4.5));
+	}
+	
+	@Test
+	public void testExpandToIncludeRangeHasTwoValuesAndInputMoreThanUpperBound()
+	{
+		Range r14 = new Range(4, 5);
+		
+		assertEquals("expandToInclude: Did not return the expected output",
+				new Range(4, 6),
+				Range.expandToInclude(r14, 6));
+	}
+	
+	@Test
+	public void testExpandToIncludeRangeHasMoreThanTwoValuesAndInputLessThanLowerBound()
+	{
+		Range r15 = new Range(3, 6);
+		
+		assertEquals("expandToInclude: Did not return the expected output",
+				new Range(1, 6),
+				Range.expandToInclude(r15, 1));
+	}
+	
+	@Test
+	public void testExpandToIncludeRangeHasMoreThanTwoValuesAndInputWithinBounds()
+	{
+		Range r16 = new Range(3, 6);
+		
+		assertEquals("expandToInclude: Did not return the expected output",
+				new Range(3, 6),
+				Range.expandToInclude(r16, 5));
+	}
+	
+	@Test
+	public void testExpandToIncludeRangeHasMoreThanTwoValuesAndInputMoreThanUpperBound()
+	{
+		Range r17 = new Range(3, 6);
+		
+		assertEquals("expandToInclude: Did not return the expected output",
+				new Range(3, 8),
+				Range.expandToInclude(r17, 8));
 	}
 }
