@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="C:/Users/daire/Downloads/Lab 2- artifacts-3/jfreechart.jar"/>
 	<classpathentry kind="lib" path="C:/Users/daire/Downloads/Lab 2- artifacts-3/jcommon-1.0.5.jar"/>
 	<classpathentry kind="lib" path="C:/DevTools/junit/junit-4.13.2.jar"/>
+	<classpathentry kind="lib" path="C:/DevTools/hamcrest/hamcrest-2.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
